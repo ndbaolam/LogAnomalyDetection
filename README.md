@@ -1,24 +1,31 @@
-# Pipeline Overview
-## Supervised Pipeline
-1. Text feature (EventTemplate): Vectorization using TF-IDF
-2. One-Hot Encoding
-3. Combine features
-4. Classification: SVM
-5. Evaluation: Precision, Recall, F1-score
+# Phát hiện chuỗi log bất thường theo request / instance (Sequence Anomaly Detection)
+1. Định nghĩa bài toán (Problem Definition)
+1.1 Bối cảnh
 
-## Unsupervised Pipeline
-1. Text feature (EventTemplate): Vectorization using TF-IDF
-2. Dimension Reduction: SVD
-2. One-Hot Encoding
-3. Combine feature
-4. Anomaly Detection: Isolation Forest
-5. Evaluation: 
+Trong hệ thống Cloud / Distributed System (OpenStack),
+mỗi yêu cầu (request) hoặc mỗi máy ảo (instance) tạo ra một chuỗi log sự kiện theo thời gian.
 
-# Running MLflow
+Các chuỗi này thường ổn định và có quy luật, phản ánh luồng xử lý bình thường của hệ thống.
+
+👉 Khi xảy ra sự cố:
+
+Thứ tự sự kiện bị thay đổi
+
+Một số sự kiện bị thiếu hoặc lặp bất thường
+
+Xuất hiện các chuỗi chưa từng thấy
+
+1.2 Mục tiêu bài toán
+
+Học hành vi chuỗi log bình thường, sau đó:
+
+Phát hiện chuỗi bất thường
+
+Phát hiện sự kiện bất thường trong chuỗi
+
+Xác định vị trí gây bất thường
+
+# Run Project
 ```sh
-mlflow models serve \
-  -m runs:/{runs_id}/model \
-  -p 1234 \
-  --host 0.0.0.0 \
-  --env-manager local
+export $(cat .env | xargs)
 ```
